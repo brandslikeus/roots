@@ -468,7 +468,9 @@ class Roots_Nav_Walker extends Walker_Nav_Menu {
     }
 
     $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
-    $class_names = $class_names ? ' class="' . $id . ' ' . esc_attr($class_names) . '"' : ' class="' . $id . '"';
+    
+      $submenu = $depth > 0 ? '-submenu' : '';
+    $class_names = $class_names ? ' class="' . $id . ' ' . esc_attr($class_names) . $submenu .'"' : ' class="' . $id . '"';
 
     $output .= $indent . '<li' . $class_names . '>';
 
@@ -597,7 +599,7 @@ function roots_nav_menu_args($args = '') {
   $roots_nav_menu_args['items_wrap'] = '<ul class="%2$s">%3$s</ul>';
 
   if ($args['walker'] == new Roots_Navbar_Nav_Walker()) {
-    $roots_nav_menu_args['depth'] = 2;
+    $roots_nav_menu_args['depth'] = 3;
   }
 
   if (!$args['walker']) {
